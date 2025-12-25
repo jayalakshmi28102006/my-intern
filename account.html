@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - ShopEasy</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopEasy</span>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="account.html" class="nav-icon" id="accountIcon">
+                        <i class="fas fa-user"></i>
+                        <span class="nav-label">Account</span>
+                    </a>
+                    <a href="cart.html" class="nav-icon cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                        <span class="nav-label">Cart</span>
+                    </a>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Account Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>My Account</h1>
+            <p>Manage your account and orders</p>
+        </div>
+    </section>
+
+    <!-- Account Section -->
+    <section class="account-page">
+        <div class="container">
+            <div id="loginRequired" class="login-required" style="display: none;">
+                <div class="empty-cart-content">
+                    <i class="fas fa-user-lock"></i>
+                    <h2>Please Login</h2>
+                    <p>You need to login to access your account</p>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+            <div id="accountContent" class="account-wrapper">
+                <div class="account-sidebar">
+                    <div class="account-menu">
+                        <button class="account-menu-item active" data-section="profile">
+                            <i class="fas fa-user"></i> Profile
+                        </button>
+                        <button class="account-menu-item" data-section="orders">
+                            <i class="fas fa-shopping-bag"></i> Orders
+                        </button>
+                        <button class="account-menu-item" data-section="addresses">
+                            <i class="fas fa-map-marker-alt"></i> Addresses
+                        </button>
+                        <button class="account-menu-item" data-section="settings">
+                            <i class="fas fa-cog"></i> Settings
+                        </button>
+                        <button class="account-menu-item" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+                <div class="account-content">
+                    <!-- Profile Section -->
+                    <div class="account-section active" id="profileSection">
+                        <h2>Profile Information</h2>
+                        <form class="account-form" id="profileForm">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="profileName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="profileEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" id="profilePhone">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+
+                    <!-- Orders Section -->
+                    <div class="account-section" id="ordersSection">
+                        <h2>Order History</h2>
+                        <div id="ordersList" class="orders-list">
+                            <!-- Orders will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Addresses Section -->
+                    <div class="account-section" id="addressesSection">
+                        <h2>Saved Addresses</h2>
+                        <div id="addressesList" class="addresses-list">
+                            <!-- Addresses will be loaded here -->
+                        </div>
+                        <div id="addressFormWrapper" class="account-form" style="margin-top: 1.5rem; display: none;">
+                            <h3 style="margin-bottom: 1rem;">Add New Address</h3>
+                            <div class="form-group">
+                                <label for="addressHouseNo">House No</label>
+                                <input type="text" id="addressHouseNo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressStreet">Street Name</label>
+                                <input type="text" id="addressStreet" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressCity">City</label>
+                                <input type="text" id="addressCity" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressCountry">Country</label>
+                                <input type="text" id="addressCountry" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addressPhone">Phone Number</label>
+                                <input type="tel" id="addressPhone" required>
+                            </div>
+                            <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                                <button id="saveAddressBtn" class="btn btn-primary" type="button">Save Address</button>
+                                <button id="cancelAddressBtn" class="btn btn-outline" type="button">Cancel</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" id="addAddressBtn">Add New Address</button>
+                    </div>
+
+                    <!-- Settings Section -->
+                    <div class="account-section" id="settingsSection">
+                        <h2>Account Settings</h2>
+                        <form class="account-form" id="settingsForm">
+                            <div class="form-group">
+                                <label>Change Password</label>
+                                <input type="password" id="currentPassword" placeholder="Current Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="newPassword" placeholder="New Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="confirmNewPassword" placeholder="Confirm New Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ShopEasy</h3>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/account.js"></script>
+</body>
+</html>
+
+
